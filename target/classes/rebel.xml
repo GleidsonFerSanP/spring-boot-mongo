@@ -8,11 +8,6 @@
 
 	<web>
 		<link target="/">
-			<dir name="/media/permanente/workspace/spring-boot-mongo/target/m2e-wtp/web-resources">
-				<exclude name="/"/>
-			</dir>
-		</link>
-		<link target="/">
 			<dir name="/media/permanente/workspace/spring-boot-mongo/src/main/webapp">
 			</dir>
 		</link>

@@ -26,7 +26,8 @@ angular.module('banners', [])
 			
 			$http({
 				method : "POST",
-				url : "http://localhost:8080/banners",
+				url : "http://45.55.134.116/servicos/banners",
+				//url : "http://localhost:8080/banners",
 				data: banner
 			}).then(function success(response) {
 				callbackSucesso(response);

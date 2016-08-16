@@ -10,6 +10,6 @@ public interface ICategoriaService {
 
 	Categoria inserir(Categoria categoria);
 
-	Categoria buscarPeloNome(String nome);
+	List<Categoria> buscarPeloNome(String nome);
 
 }

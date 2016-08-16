@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<title>Categoria</title>
+<title>Subcategoria</title>
 
 <link rel="stylesheet" href="js/bootstrap/css/bootstrap.min.css" />
 </head>
@@ -24,14 +24,17 @@
 				</div>
 					
 				<button type="button" ng-click="buscar(nome)" class="btn btn-default">Buscar</button>
-
-				<form ng-submit="inserir(subcategoria)" >
+				
+					
+				{{categoria}}
+				
+				<form ng-submit="inserir(subcategoria, categoria)" >
 					<div class="form-group">
-						<label for="titulo">MACRO</label> 
-						<select name="" id="" ng-model="subcategoria.categoria" class="form-control">
+						<label for="titulo">Categorias</label> 
+						<select ng-model="categoria" ng-change="selectCategoria(categoria)" class="form-control" ng-init="listarCategorias()">
 							<option value="">Selecione</option>
 							
-							<option value="categoria" ng-repeat="categoria in categorias">{{categoria.nome}}</option>
+							<option value="{{c}}" ng-repeat="c in categorias">{{c.nome}}</option>
 							
 						</select>
 					</div>
@@ -53,6 +56,8 @@
 	<script type="text/javascript" src="js/bootstrap/js/bootstrap.min.js"></script>
 	
 	<script type="text/javascript" src="js/angular/angular.min.js"></script>
+	
+	<script type="text/javascript" src="js/app/config.js"></script>
 	
 	<script type="text/javascript" src="js/app/categoria.js"></script>
 	<script type="text/javascript" src="js/app/subcategoria.js"></script>

@@ -1,5 +1,5 @@
 
-angular.module('banners', [])
+angular.module('banners', ['config'])
 .controller('BannerCtrl', function($scope, Banner) {
 	
 	console.log("init banner");
@@ -19,15 +19,14 @@ angular.module('banners', [])
 	}
 	
 })
-.factory('Banner', function($http) {
+.factory('Banner', function($http, Config) {
 	
 	return {
 		inserir : function(banner, callbackSucesso, callbackErro) {
 			
 			$http({
 				method : "POST",
-				url : "http://45.55.134.116/servicos/banners",
-				//url : "http://localhost:8080/banners",
+				url : Config.baseUrl+"/banners",
 				data: banner
 			}).then(function success(response) {
 				callbackSucesso(response);

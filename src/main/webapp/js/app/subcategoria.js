@@ -1,20 +1,41 @@
 
-angular.module('subcategorias', ['categorias'])
+angular.module('subcategorias', ['categorias','config'])
 .controller('SubcategoriaCtrl', function($scope,Subcategoria, Categoria) {
 	
 	console.log("init subcategoria");
 	
-	$scope.inserir = function(obj) {
+	$scope.subcategoria = {
+			nome: null,
+	}
+	
+	$scope.categoria = {};
+	
+	var subcategorias = new Array();
+	
+	$scope.selectCategoria = function(categoria) {
+		console.log(categoria);
+	}
+	
+	$scope.inserir = function(subcategoria, categoria) {
 		
-		console.log(obj);
+		//var categoria = obj.categoria;
 		
-		Subcategoria.inserir(obj, function(response) {
-			console.log(response);
+		//subcategorias.push(obj);
+		
+		console.log(subcategoria);
+
+		console.log(categoria);
+	/*	
+		categoria.subcategorias = subcategorias;
+		
+		console.log(categoria);*/
+		
+		/*Categoria.inserir(categoria, function(response) {
 			
 			delete $scope.subcategoria;
 		}, function(response) {
 			console.log(response);
-		})
+		})*/
 		
 	}
 	
@@ -43,14 +64,14 @@ angular.module('subcategorias', ['categorias'])
 	}
 	
 })
-.factory('Subcategoria', function($http) {
+.factory('Subcategoria', function($http, Config) {
 	
 	return {
 		inserir : function(obj, callbackSucesso, callbackErro) {
 			
 			$http({
 				method : "POST",
-				url : "http://45.55.134.116/servicos/subcategorias",
+				url : Config.baseUrl+"/subcategorias",
 				data: obj
 			}).then(function success(response) {
 				callbackSucesso(response);
@@ -63,7 +84,7 @@ angular.module('subcategorias', ['categorias'])
 			
 			$http({
 				method : "GET",
-				url : "http://45.55.134.116/servicos/subcategorias/"+nome,
+				url : Config.baseUrl+"/subcategorias/"+nome,
 			}).then(function success(response) {
 				callbackSucesso(response);
 			}, function error(response) {

@@ -10,25 +10,29 @@
 
 	<div class="container" ng-app="categorias">
 		<div class="row" ng-controller="CategoriaCtrl">
-		
-		<br />
-		
-		<br /><br /><br /><br /><br />
-		
+
+			<br /> <br />
+			<br />
+			<br />
+			<br />
+			<br />
+
 			<hr />
 			<div class="col-md-12">
-			
-				<div class="form-group">
-						<label for="url">Nome</label> 
-						<input 	type="text" class="form-control" ng-model="nome" id="url" placeholder="Login">
-				</div>
-					
-				<button type="button" ng-click="buscar(nome)" class="btn btn-default">Buscar</button>
 
-				<form ng-submit="inserir(categoria)" >
+				<div class="form-group">
+					<label for="url">Nome</label> <input type="text"
+						class="form-control" ng-model="nome" id="url" placeholder="Nome">
+				</div>
+
+				<button type="button" ng-click="buscaDeCategoriasPorPalavraChave(nome)"
+					class="btn btn-default">Buscar</button>
+				
+
+				<form ng-submit="salvarCategoria()">
 					<div class="form-group">
-						<label for="titulo">MACRO</label> 
-						<select name="" id="" ng-model="categoria.macroCategoria" class="form-control">
+						<label for="titulo">MACRO</label> <select name="" id=""
+							ng-model="categoria.macroCategoria" class="form-control">
 							<option value="">Selecione</option>
 							<option value="CASA">CASA</option>
 							<option value="SAUDE">SAUDE</option>
@@ -37,14 +41,95 @@
 						</select>
 					</div>
 					<div class="form-group">
-						<label for="titulo">Nome</label> 
-						<input 	type="text" ng-model="categoria.nome" class="form-control" id="titulo" placeholder="Nome">
+						<label for="titulo">Nome</label> <input type="text"
+							ng-model="categoria.nome" class="form-control" id="titulo"
+							placeholder="Nome">
 					</div>
-					<button type="submit" class="btn btn-default">Inserir</button>
+					<button type="submit" class="btn btn-default">Salvar</button>
+					<button type="button" ng-click="nova()" class="btn btn-default">Nova</button>
+
+					<!-- Button trigger modal -->
+					<button type="button" class="btn btn-primary" data-toggle="modal"
+						data-target="#myModal" ng-if="categoria.id">Subcategorias</button>
 				</form>
+			
+			
+			<br />	
+			<br />	
+			<br />
+			</div>
+			
+				
+
+			<div class="col-md-12">
+
+				<div class="table-responsive">
+					<table class="table table-bordered">
+
+						<tr>
+							<td align="center" width="100">ID</td>
+							<td align="center">NOME</td>
+							<td align="center">&nbsp;</td>
+						</tr>
+						<tr ng-repeat="cat in categorias">
+							<td align="center" width="100">{{cat.id}}</td>
+							<td align="center">{{cat.nome}}</td>
+							<td align="center" width="100"><button type="button" class="btn btn-warning" ng-click="editarCategoria(cat)" data-dismiss="modal">Editar</button></td>
+						</tr>
+
+					</table>
+				</div>
 
 			</div>
-			<hr />
+
+
+
+			<!-- Modal -->
+			<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+				aria-labelledby="myModalLabel">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal"
+								aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+							<h4 class="modal-title" id="myModalLabel">Subcategoria</h4>
+						</div>
+						<div class="modal-body">
+							<div class="form-group">
+								<label for="titulo">Nome</label> <input type="text"
+									ng-model="subcategoria.nome" class="form-control" id="titulo"
+									placeholder="Nome">
+							</div>
+
+							<table class="table table-bordered">
+								<tr>
+									<td>ID</td>
+									<td>NOME</td>
+									<td>&nbsp;</td>
+									<td>&nbsp;</td>
+								</tr>
+								<tr ng-repeat="sub in categoria.subcategorias">
+									<td>{{sub.id}}</td>
+									<td> <span ng-show="!editar"> {{sub.nome}}</span>  <input ng-show="editar" type="text" ng-model="categoria.subcategorias[$index].nome" /></td>
+									<td><button type="button" class="btn btn-warning" ng-show="!editar" ng-click="editarSubcategoria()">Editar</button>
+									<button type="button" class="btn btn-success" ng-show="editar" ng-click="atualizarSubcategoria(categoria.subcategorias[$index])">Salvar</button></td>
+									<td><button type="button" class="btn btn-danger" ng-click="removerSubcategoria(sub)">Remover</button></td>
+								</tr>
+
+							</table>
+
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default"
+								data-dismiss="modal">Fechar</button>
+							<button type="button" class="btn btn-primary"
+								ng-click="inserirSubcategoria(subcategoria)">Inserir</button>
+						</div>
+					</div>
+				</div>
+			</div>
 
 		</div>
 	</div>
@@ -52,9 +137,11 @@
 
 	<script type="text/javascript" src="js/jquery/jquery.min.js"></script>
 	<script type="text/javascript" src="js/bootstrap/js/bootstrap.min.js"></script>
-	
+
 	<script type="text/javascript" src="js/angular/angular.min.js"></script>
-	
+
+	<script type="text/javascript" src="js/app/config.js"></script>
+	<script type="text/javascript" src="js/app/subcategoria.js"></script>
 	<script type="text/javascript" src="js/app/categoria.js"></script>
 </body>
 </html>

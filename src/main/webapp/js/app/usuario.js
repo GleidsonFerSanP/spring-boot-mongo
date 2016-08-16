@@ -1,5 +1,5 @@
 
-angular.module('usuarios', [])
+angular.module('usuarios', ['config'])
 .controller('UsuarioCtrl', function($scope, Usuario) {
 	
 	console.log("init categoria");
@@ -35,14 +35,14 @@ angular.module('usuarios', [])
 	}
 	
 })
-.factory('Usuario', function($http) {
+.factory('Usuario', function($http, Config) {
 	
 	return {
 		inserir : function(obj, callbackSucesso, callbackErro) {
 			
 			$http({
 				method : "POST",
-				url : "http://45.55.134.116/servicos/usuarios",
+				url : Config.baseUrl+"/usuarios",
 				data: obj
 			}).then(function success(response) {
 				callbackSucesso(response);
@@ -55,7 +55,7 @@ angular.module('usuarios', [])
 			
 			$http({
 				method : "GET",
-				url : "http://45.55.134.116/servicos/usuarios/"+login,
+				url : Config.baseUrl+"/usuarios/"+login,
 			}).then(function success(response) {
 				callbackSucesso(response);
 			}, function error(response) {

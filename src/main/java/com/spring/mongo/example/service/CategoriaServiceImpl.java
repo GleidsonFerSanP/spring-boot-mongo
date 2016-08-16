@@ -25,7 +25,7 @@ public class CategoriaServiceImpl implements ICategoriaService{
 	}
 
 	@Override
-	public Categoria buscarPeloNome(String nome) {
+	public List<Categoria> buscarPeloNome(String nome) {
 		return iCategoriaRepository.findByNome(nome);
 	}
 

@@ -12,4 +12,6 @@ public interface IUsuarioService {
 
 	Usuario buscarPeloLogin(String login);
 
+	List<Usuario> buscar(String nome, String email);
+
 }

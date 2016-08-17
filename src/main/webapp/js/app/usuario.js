@@ -19,6 +19,18 @@ angular.module('usuarios', ['config'])
 		})
 		
 	}
+	
+	$scope.listarUsuarios = function(nome, email) {
+		
+		Usuario.listar(nome, email, function(response) {
+			console.log(response);
+			
+			$scope.usuarios = response.data;
+			
+		}, function(response) {
+			console.log(response);
+		});
+	}
 
 	$scope.buscar = function(login) {
 		
@@ -33,6 +45,12 @@ angular.module('usuarios', ['config'])
 		})
 		
 	}
+	
+	$scope.init = function() {
+		$scope.listarUsuarios();
+	}
+	
+	$scope.init();
 	
 })
 .factory('Usuario', function($http, Config) {
@@ -63,6 +81,31 @@ angular.module('usuarios', ['config'])
 			});
 			
 		},
+		
+		listar: function(nome,email, callbackSucesso, callbackErro) {
+			$http({
+				method : "GET",
+				url : Config.baseUrl+"/usuarios/"+nome,
+			}).then(function success(response) {
+				callbackSucesso(response);
+			}, function error(response) {
+				callbackErro(response);
+			});
+			
+		},
 	}
 	
 })
+
+function getUrlParams(params) {
+
+	var url = "";
+	
+	for (var i = 0; i < params.length; i++) {
+		
+		
+	}
+	
+	return url;
+	
+}

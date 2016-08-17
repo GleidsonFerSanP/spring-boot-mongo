@@ -22,7 +22,7 @@ public class Usuario implements Serializable{
 	private String senha;
 
 	private String urlImagemPerfil;
-
+	
 	public Usuario(String id, String nome, String email, String login,
 			String senha, String urlImagemPerfil) {
 		super();

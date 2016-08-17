@@ -3,6 +3,7 @@ package com.spring.mongo.example.resource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -24,6 +25,14 @@ public class UsuarioResources {
 	@RequestMapping(method = RequestMethod.GET)
 	public ResponseEntity<?> listar(){
 		return ResponseEntity.ok(iUsuarioService.listarTodos());
+	}
+	
+	@ResponseBody
+	@RequestMapping(method = RequestMethod.GET)
+	public ResponseEntity<?> listar(
+			@RequestAttribute(required= false) String nome,
+			@RequestAttribute(required= false) String email){
+		return ResponseEntity.ok(iUsuarioService.buscar(nome, email));
 	}
 
 	@ResponseBody

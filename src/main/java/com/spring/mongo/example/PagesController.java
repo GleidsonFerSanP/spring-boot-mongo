@@ -8,6 +8,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class PagesController {
 
+	@RequestMapping(value="/", method = RequestMethod.GET)
+	public String home(){
+		return "index";
+	}
 	@RequestMapping(value="banner-form", method = RequestMethod.GET)
 	public String banner(){
 		return "banner";

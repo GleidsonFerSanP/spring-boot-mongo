@@ -29,4 +29,10 @@ public class UsuarioServiceImpl implements IUsuarioService{
 		return iUsuarioRepository.findByLogin(login);
 	}
 
+	@Override
+	public List<Usuario> buscar(String nome, String email) {
+		
+		return iUsuarioRepository.findByNomeOrEmail(nome,email);
+	}
+
 }

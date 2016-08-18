@@ -6,6 +6,10 @@ angular.module('usuarios', ['config'])
 	
 	$scope.usuario = {};
 	
+	$scope.editarUsuario = function(usuario) {
+		$scope.usuario = usuario;
+	}
+	
 	$scope.inserir = function(obj) {
 		
 		console.log(obj);
@@ -22,10 +26,14 @@ angular.module('usuarios', ['config'])
 	
 	$scope.listarUsuarios = function(nome, email) {
 		
+		console.log("Nome: "+nome);
+		console.log("Email: "+email);
+		
 		Usuario.listar(nome, email, function(response) {
-			console.log(response);
-			
+
 			$scope.usuarios = response.data;
+			
+			console.log(response.data);
 			
 		}, function(response) {
 			console.log(response);
@@ -83,9 +91,14 @@ angular.module('usuarios', ['config'])
 		},
 		
 		listar: function(nome,email, callbackSucesso, callbackErro) {
+			
+			var url = Config.baseUrl+"/usuarios/"+getUrlParams(nome, email);
+			
+			console.log(url);
+			
 			$http({
 				method : "GET",
-				url : Config.baseUrl+"/usuarios/"+nome,
+				url : url,
 			}).then(function success(response) {
 				callbackSucesso(response);
 			}, function error(response) {
@@ -97,13 +110,16 @@ angular.module('usuarios', ['config'])
 	
 })
 
-function getUrlParams(params) {
+function getUrlParams(nome, email) {
 
 	var url = "";
 	
-	for (var i = 0; i < params.length; i++) {
-		
-		
+	if(nome){
+		url += "?nome="+nome;
+	}
+	
+	if(email){
+		url += "&email="+email;
 	}
 	
 	return url;

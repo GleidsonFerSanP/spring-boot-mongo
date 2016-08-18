@@ -40,13 +40,8 @@
 			<div class="col-md-12">
 				
 				<div class="form-group">
-						<label for="url">Nome</label> 
-						<input 	type="text" class="form-control" ng-model="nome" id="url" placeholder="Nome">
-						<label for="email">Email</label> 
-						<input 	type="email" class="form-control" ng-model="email" id="email" placeholder="Email">
-				</div>
-					
-				<button type="button" ng-click="listarUsuarios(nome, email)" class="btn btn-default">Buscar</button>
+						<label for="url">Nome ou Email</label> 
+						<input 	type="text" class="form-control" ng-change="listarUsuarios(nome, nome)" ng-model="nome" id="url" placeholder="Nome ou email">
 			
 
 				<form ng-submit="inserir(usuario)" >

@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -28,10 +29,10 @@ public class UsuarioResources {
 	}
 	
 	@ResponseBody
-	@RequestMapping(method = RequestMethod.GET)
+	@RequestMapping(value="/", method = RequestMethod.GET)
 	public ResponseEntity<?> listar(
-			@RequestAttribute(required= false) String nome,
-			@RequestAttribute(required= false) String email){
+			@RequestParam(required= false) String nome,
+			@RequestParam(required= false) String email){
 		return ResponseEntity.ok(iUsuarioService.buscar(nome, email));
 	}
 
